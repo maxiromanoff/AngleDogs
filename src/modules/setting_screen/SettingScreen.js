@@ -17,9 +17,13 @@ const SettingScreen = () => {
           <Text>{DeviceInfo.getApplicationName()}</Text>
         </View>
         <View style={styles.version}>
-          <Text bold style={styles.title}>Version: </Text>
+          <Text bold style={styles.title}>App Version: </Text>
           <Text>{DeviceInfo.getVersion()}</Text>
         </View>
+        <Text>{`Dedicated to dog lovers around the world !`}</Text>
+      </View>
+      <View style={styles.copyright}>
+        <Text style={styles.textCopyright}>{`Copyright © maxiromanoff`}</Text>
       </View>
     </Layout>
   )
@@ -41,6 +45,17 @@ const styles = StyleSheet.create({
   version: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: scale(8),
+  },
+  copyright: {
+    position: 'absolute',
+    bottom: 30,
+    left: 0,
+    right: 0
+  },
+  textCopyright: {
+    fontSize: fontSize.smallest,
+    textAlign: 'center',
   }
 });
 
