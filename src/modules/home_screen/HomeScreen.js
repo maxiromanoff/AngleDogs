@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
 
   appName: {
     fontSize: fontSize.big,
+    color: colors.black,
   },
   searchPet: {
     paddingHorizontal: scale(15),

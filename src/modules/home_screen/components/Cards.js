@@ -12,6 +12,8 @@ import { Text, Button } from '../../../components';
 import DATA from './data';
 import { colors } from '../../../constants';
 import { hScale } from '../../../utils/resolutions';
+import { useNavigation } from '@react-navigation/native';
+import routes from '../../routes';
 
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
@@ -19,13 +21,19 @@ const WIDTH = (Dimensions.get('window').width - 60) / 2;
 
 const Cards = () => {
 
+  const navigation = useNavigation();
+
+  const gotoDetail = id => {
+    navigation.navigate(routes.DETAIL_SCREEN, { id })
+  }
+
   const keyExtractor = item => String(item.id);
 
   const renderItem = ({ item }) => {
     return (
-      <Button style={styles.card}>
+      <Button style={styles.card} onPress={() => gotoDetail(item.id)}>
         <Image
-          source={{ uri: item.image }}
+          source={{ uri: item.avatar }}
           style={styles.image}
         />
         <View style={styles.title}>
