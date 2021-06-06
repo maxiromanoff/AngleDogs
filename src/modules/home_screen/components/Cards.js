@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList, View } from 'react-native';
 import { Text, Button } from '../../../components';
 import { colors } from '../../../constants';
 import { resolutions, formatList } from '../../../utils';
@@ -39,6 +39,18 @@ const Cards = () => {
     );
   };
 
+  if (!list) {
+    return (
+      <View style={styles.loadings}>
+        {
+          [1, 2, 3, 4, 5, 6, 7, 8].map(n =>
+            <View style={styles.loading} key={n} />
+          )
+        }
+      </View>
+    )
+  }
+
   return (
     <FlatList
       data={list}
@@ -60,6 +72,16 @@ const styles = StyleSheet.create({
   },
   itemName: {
     textTransform: 'capitalize',
+  },
+  loadings: {
+    paddingHorizontal: scale(15),
+  },
+  loading: {
+    backgroundColor: "#f9f9f9",
+    height: 35,
+    width: '100%',
+    marginVertical: scale(7),
+    borderRadius: 1,
   }
 });
 

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {
+  View,
   StyleSheet,
   FlatList,
   Image as RNImage,
   Dimensions,
 } from 'react-native';
 import { Header } from '../../components';
-import { scale } from '../../utils/resolutions';
+import { hScale, scale } from '../../utils/resolutions';
 import { Layout } from '../../views';
 import { ApiDogs } from '../../action/Api';
 import FastImage from 'react-native-fast-image';
@@ -53,6 +54,7 @@ const DetailScreen = ({ route }) => {
   useEffect(() => {
     fetchInit();
   }, []);
+
   const keyExtractor = item => String(item);
 
   const renderItem = ({ item }) => {
@@ -62,11 +64,18 @@ const DetailScreen = ({ route }) => {
   return (
     <Layout>
       <Header title="Detail" />
-      <FlatList
-        data={dogs}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-      />
+      {!dogs
+        ? <View style={styles.loadings}>
+          {
+            [1, 2, 3].map(i => <View style={styles.loading} key={i} />)
+          }
+        </View>
+        : <FlatList
+          data={dogs}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+        />
+      }
     </Layout>
   );
 };
@@ -75,6 +84,13 @@ const styles = StyleSheet.create({
   image: {
     marginVertical: scale(5),
   },
+  loading: {
+    backgroundColor: "#f9f9f9",
+    height: hScale(175),
+    width: '100%',
+    marginVertical: scale(7),
+    borderRadius: 1,
+  }
 });
 
 export default DetailScreen;
