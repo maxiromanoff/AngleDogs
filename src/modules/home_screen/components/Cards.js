@@ -33,7 +33,7 @@ const Cards = () => {
   const renderItem = ({ item }) => {
     return (
       <Button style={styles.card} onPress={() => gotoDetail(item)}>
-        <Text style={styles.itemName}>{item.replace(/-/gi, " ")}</Text>
+        <Text style={styles.itemName}>{item.replace(/-/gi, ' ')}</Text>
         <Feather name="chevron-right" size={20} color={colors.black} />
       </Button>
     );
@@ -42,13 +42,11 @@ const Cards = () => {
   if (!list) {
     return (
       <View style={styles.loadings}>
-        {
-          [1, 2, 3, 4, 5, 6, 7, 8].map(n =>
-            <View style={styles.loading} key={n} />
-          )
-        }
+        {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
+          <View style={styles.loading} key={n} />
+        ))}
       </View>
-    )
+    );
   }
 
   return (
@@ -77,12 +75,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(15),
   },
   loading: {
-    backgroundColor: "#f9f9f9",
+    backgroundColor: '#f9f9f9',
     height: 35,
     width: '100%',
     marginVertical: scale(7),
     borderRadius: 1,
-  }
+  },
 });
 
 export default React.memo(Cards);

@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import routes from '../routes';
 import { Cards } from './components';
-import RNBootSplash from "react-native-bootsplash";
+import RNBootSplash from 'react-native-bootsplash';
 
 const schema = yup.object().shape({
   input: yup.string().trim(),
@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     RNBootSplash.hide();
-  }, [])
+  }, []);
 
   return (
     <Layout>
