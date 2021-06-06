@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: scale(12),
-    paddingHorizontal: scale(15),
-    marginBottom: scale(10),
+    paddingLeft: scale(12),
+    marginBottom: scale(2),
   },
   title: {
     fontSize: fontSize.larger,

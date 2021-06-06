@@ -34,6 +34,7 @@ const SettingScreen = () => {
 
 const styles = StyleSheet.create({
   appInfo: {
+    marginTop: scale(10),
     paddingHorizontal: scale(15),
   },
   title: {

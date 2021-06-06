@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
           <Feather name="menu" size={24} color={colors.black} />
         </Button>
       </View>
-      <View style={styles.searchPet}>
+      {/* <View style={styles.searchPet}>
         <Formik
           initialValues={initialValues}
           onSubmit={values => console.log(values)}
@@ -74,7 +74,7 @@ const HomeScreen = ({ navigation }) => {
             </View>
           )}
         </Formik>
-      </View>
+      </View> */}
       <Cards />
     </Layout>
   );
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: scale(15),
-    marginTop: scale(15),
-    marginBottom: scale(10),
+    marginTop: scale(12),
+    marginBottom: scale(1),
   },
 
   appName: {

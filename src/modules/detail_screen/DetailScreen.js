@@ -53,7 +53,7 @@ const DetailScreen = ({ route }) => {
   const { name } = route.params;
 
   const handleCloseBtn = () => {
-    !setModalVisible(prev => !prev);
+    setModalVisible(false);
   };
 
   const fetchInit = async () => {
@@ -76,22 +76,27 @@ const DetailScreen = ({ route }) => {
     );
   };
 
-  return (
-    <Layout>
-      <Header title="Detail" />
-      {!dogs ? (
+  if (!dogs) {
+    return (
+      <Layout>
+        <Header title="Detail" />
         <View style={styles.loadings}>
           {[1, 2, 3].map(i => (
             <View style={styles.loading} key={i} />
           ))}
         </View>
-      ) : (
-        <FlatList
-          data={dogs}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-        />
-      )}
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout>
+      <Header title="Detail" />
+      <FlatList
+        data={dogs}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+      />
       <Modal visible={!!modalVisible} transparent={true}>
         <ImageViewer
           imageUrls={[{ url: modalVisible }]}
@@ -109,6 +114,7 @@ const DetailScreen = ({ route }) => {
 const styles = StyleSheet.create({
   image: {
     marginVertical: scale(5),
+    backgroundColor: '#f9f9f9',
   },
   loading: {
     backgroundColor: '#f9f9f9',
@@ -118,9 +124,11 @@ const styles = StyleSheet.create({
     borderRadius: 1,
   },
   closeBtn: {
-    alignSelf: 'flex-end',
-    marginTop: scale(25),
-    paddingHorizontal: scale(15),
+    padding: scale(15),
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    zIndex: 9999,
   },
 });
 
