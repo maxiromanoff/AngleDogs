@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: scale(12),
     paddingHorizontal: scale(15),
-    marginBottom: scale(12),
+    marginBottom: scale(10),
   },
   title: {
     fontSize: fontSize.larger,

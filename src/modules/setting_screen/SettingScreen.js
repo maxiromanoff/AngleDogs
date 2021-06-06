@@ -23,7 +23,7 @@ const SettingScreen = () => {
           </Text>
           <Text>{DeviceInfo.getVersion()}</Text>
         </View>
-        <Text>{'Dedicated to dog lovers around the world !'}</Text>
+        <Text>{'A gift for all dog lovers around the world !'}</Text>
       </View>
       <View style={styles.copyright}>
         <Text style={styles.textCopyright}>{'Copyright © maxiromanoff'}</Text>

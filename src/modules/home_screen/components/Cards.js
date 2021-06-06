@@ -33,7 +33,7 @@ const Cards = () => {
   const renderItem = ({ item }) => {
     return (
       <Button style={styles.card} onPress={() => gotoDetail(item)}>
-        <Text style={styles.itemName}>{item}</Text>
+        <Text style={styles.itemName}>{item.replace(/-/gi, " ")}</Text>
         <Feather name="chevron-right" size={20} color={colors.black} />
       </Button>
     );
@@ -58,6 +58,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(15),
     paddingVertical: scale(7),
   },
+  itemName: {
+    textTransform: 'capitalize',
+  }
 });
 
 export default React.memo(Cards);
