@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Input, Button } from '../../components';
 import { colors, fontSize } from '../../constants';
@@ -9,6 +9,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import routes from '../routes';
 import { Cards } from './components';
+import RNBootSplash from "react-native-bootsplash";
 
 const schema = yup.object().shape({
   input: yup.string().trim(),
@@ -22,6 +23,10 @@ const HomeScreen = ({ navigation }) => {
   const gotoSetting = () => {
     navigation.navigate(routes.SETTING_SCREEN);
   };
+
+  useEffect(() => {
+    RNBootSplash.hide();
+  }, [])
 
   return (
     <Layout>
