@@ -4,12 +4,7 @@ import { colors } from '../constants';
 
 const Layout = ({ children, bgColor }) => {
   return (
-    <View
-      style={[
-        { backgroundColor: bgColor || colors.white },
-        styles.layout
-      ]}
-    >
+    <View style={[{ backgroundColor: bgColor || colors.white }, styles.layout]}>
       <StatusBar
         animated
         barStyle="dark-content"
@@ -17,13 +12,13 @@ const Layout = ({ children, bgColor }) => {
       />
       {children}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   layout: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default Layout;

@@ -1,5 +1,4 @@
 import * as resolutions from './resolutions';
+import formatList from './formatList';
 
-export {
-  resolutions,
-};
+export { resolutions, formatList };

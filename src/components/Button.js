@@ -8,14 +8,11 @@ const defaultProps = {
 
 const Button = ({ children, ...rest }) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.85}
-      {...rest}
-    >
+    <TouchableOpacity activeOpacity={0.85} {...rest}>
       {children}
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 Button.defaultProps = defaultProps;
-export default Button
+export default Button;

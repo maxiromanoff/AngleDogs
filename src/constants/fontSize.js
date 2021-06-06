@@ -21,4 +21,3 @@ export const large = RFValue(18, STANDARD_SCREEN_HEIGHT);
 export const larger = RFValue(20, STANDARD_SCREEN_HEIGHT);
 
 export const big = RFValue(22, STANDARD_SCREEN_HEIGHT);
-

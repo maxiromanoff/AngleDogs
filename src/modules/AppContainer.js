@@ -15,7 +15,7 @@ const AppContainer = () => {
       <Stack.Screen name={routes.SETTING_SCREEN} component={SettingScreen} />
       <Stack.Screen name={routes.DETAIL_SCREEN} component={DetailScreen} />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 export default AppContainer;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text, Input, Button } from '../../components';
 import { colors, fontSize } from '../../constants';
 import { Layout } from '../../views';
@@ -11,76 +11,69 @@ import routes from '../routes';
 import { Cards } from './components';
 
 const schema = yup.object().shape({
-  input: yup.string().trim()
+  input: yup.string().trim(),
 });
 
 const initialValues = {
-  input: "",
+  input: '',
 };
 
 const HomeScreen = ({ navigation }) => {
-
   const gotoSetting = () => {
-    navigation.navigate(routes.SETTING_SCREEN)
+    navigation.navigate(routes.SETTING_SCREEN);
   };
 
   return (
     <Layout>
       <View style={styles.header}>
         <Text bold style={styles.appName}>
-          {`Angel Dogs`}
+          {'Angel Dogs'}
         </Text>
         <Button onPress={gotoSetting}>
-          <Feather
-            name="menu"
-            size={24}
-            color={colors.black}
-          />
+          <Feather name="menu" size={24} color={colors.black} />
         </Button>
       </View>
       <View style={styles.searchPet}>
         <Formik
           initialValues={initialValues}
           onSubmit={values => console.log(values)}
-          validationSchema={schema}
-        >
-          {
-            ({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-              resetForm,
-            }) => (
-              <View>
-                <View style={styles.search}>
-                  <Button style={styles.btnSearch}>
-                    <Feather
-                      name="search"
-                      size={17}
-                      color={colors.black}
-                      style={styles.iconSearch}
-                    />
-                  </Button>
-                  <Input
-                    name="input"
-                    placeholder="Search here"
-                    style={styles.input}
-                    returnKeyType="search"
-                    onSubmitEditing={handleSubmit}
-                    {...{ values, errors, touched, handleChange, handleBlur }}
+          validationSchema={schema}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+            resetForm,
+          }) => (
+            <View>
+              <View style={styles.search}>
+                <Button style={styles.btnSearch}>
+                  <Feather
+                    name="search"
+                    size={17}
+                    color={colors.black}
+                    style={styles.iconSearch}
                   />
-                </View>
+                </Button>
+                <Input
+                  name="input"
+                  placeholder="Search here"
+                  style={styles.input}
+                  returnKeyType="search"
+                  onSubmitEditing={handleSubmit}
+                  {...{ values, errors, touched, handleChange, handleBlur }}
+                />
               </View>
-            )}
+            </View>
+          )}
         </Formik>
       </View>
-        <Cards />
+      <Cards />
     </Layout>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -125,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen
+export default HomeScreen;

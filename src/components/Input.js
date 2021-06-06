@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { colors, fontSize } from '../constants';
 import { scale } from '../utils/resolutions';
+import Text from './Text';
 
 const Input = ({
   name,
@@ -20,13 +21,12 @@ const Input = ({
         value={values[name]}
         {...rest}
       />
-      {errors && touched && errors[name] && touched[name]
-        ? <Text style={styles.error}>{errors[name]}</Text>
-        : null
-      }
+      {errors && touched && errors[name] && touched[name] ? (
+        <Text style={styles.error}>{errors[name]}</Text>
+      ) : null}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   error: {
