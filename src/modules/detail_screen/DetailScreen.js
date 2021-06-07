@@ -10,11 +10,12 @@ import {
 import { Header, Button } from '../../components';
 import { hScale, scale } from '../../utils/resolutions';
 import { Layout } from '../../views';
-import { ApiDogs } from '../../action/Api';
 import FastImage from 'react-native-fast-image';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { colors } from '../../constants';
+import { observer } from 'mobx-react';
+import { useStore } from "../../context";
 
 const { width, height } = Dimensions.get('window');
 
@@ -47,8 +48,9 @@ const Image = ({ uri }) => {
 };
 
 const DetailScreen = ({ route }) => {
-  const [dogs, _setDogs] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { dogsStore: { listDogs, fetchDogsApi } } = useStore();
 
   const { name } = route.params;
 
@@ -56,13 +58,8 @@ const DetailScreen = ({ route }) => {
     setModalVisible(false);
   };
 
-  const fetchInit = async () => {
-    let resDogs = await ApiDogs(name);
-    _setDogs(resDogs.data.message);
-  };
-
   useEffect(() => {
-    fetchInit();
+    fetchDogsApi(name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,7 +73,7 @@ const DetailScreen = ({ route }) => {
     );
   };
 
-  if (!dogs) {
+  if (!listDogs) {
     return (
       <Layout>
         <Header title="Detail" />
@@ -93,7 +90,7 @@ const DetailScreen = ({ route }) => {
     <Layout>
       <Header title="Detail" />
       <FlatList
-        data={dogs}
+        data={listDogs}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
@@ -132,4 +129,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailScreen;
+export default observer(DetailScreen);

@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, FlatList, View } from 'react-native';
 import { Text, Button } from '../../../components';
 import { colors } from '../../../constants';
-import { resolutions, formatList } from '../../../utils';
+import { resolutions } from '../../../utils';
 import { useNavigation } from '@react-navigation/native';
 import routes from '../../routes';
 import Feather from 'react-native-vector-icons/Feather';
-import { ApiList } from '../../../action/Api';
+import { observer } from 'mobx-react';
+import { useStore } from '../../../context';
 
 const { scale } = resolutions;
 
-const Cards = () => {
-  const [list, _setList] = useState(null);
-
-  const fetchList = async () => {
-    let resList = await ApiList();
-    _setList(formatList(resList.data));
-  };
+const Cards = ({ textFilter }) => {
+  const { dogsStore: { listItems, fetchListItemApi, filterItems } } = useStore();
 
   useEffect(() => {
-    fetchList();
+    fetchListItemApi();
   }, []);
 
   const navigation = useNavigation();
@@ -39,7 +35,7 @@ const Cards = () => {
     );
   };
 
-  if (!list) {
+  if (!listItems) {
     return (
       <View style={styles.loadings}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
@@ -51,7 +47,7 @@ const Cards = () => {
 
   return (
     <FlatList
-      data={list}
+      data={textFilter ? filterItems(textFilter) : listItems}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
       initialNumToRender={20}
@@ -83,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.memo(Cards);
+export default React.memo(observer(Cards));

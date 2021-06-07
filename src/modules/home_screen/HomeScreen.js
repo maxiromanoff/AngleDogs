@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, TextInput, Keyboard } from 'react-native';
 import { Text, Input, Button } from '../../components';
 import { colors, fontSize } from '../../constants';
 import { Layout } from '../../views';
@@ -20,6 +20,8 @@ const initialValues = {
 };
 
 const HomeScreen = ({ navigation }) => {
+  const [textFilter, setTextFilter] = useState('');
+
   const gotoSetting = () => {
     navigation.navigate(routes.SETTING_SCREEN);
   };
@@ -38,44 +40,25 @@ const HomeScreen = ({ navigation }) => {
           <Feather name="menu" size={24} color={colors.black} />
         </Button>
       </View>
-      {/* <View style={styles.searchPet}>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={values => console.log(values)}
-          validationSchema={schema}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-            resetForm,
-          }) => (
-            <View>
-              <View style={styles.search}>
-                <Button style={styles.btnSearch}>
-                  <Feather
-                    name="search"
-                    size={17}
-                    color={colors.black}
-                    style={styles.iconSearch}
-                  />
-                </Button>
-                <Input
-                  name="input"
-                  placeholder="Search here"
-                  style={styles.input}
-                  returnKeyType="search"
-                  onSubmitEditing={handleSubmit}
-                  {...{ values, errors, touched, handleChange, handleBlur }}
-                />
-              </View>
-            </View>
-          )}
-        </Formik>
-      </View> */}
-      <Cards />
+      <View style={styles.searchPet}>
+        <View style={styles.search}>
+          <Button style={styles.btnSearch}>
+            <Feather
+              name="search"
+              size={17}
+              color={colors.black}
+              style={styles.iconSearch}
+            />
+          </Button>
+          <TextInput
+            placeholder="Search here"
+            style={styles.input}
+            returnKeyType="search"
+            onChangeText={text => setTextFilter(text)}
+          />
+        </View>
+      </View>
+      <Cards {...{ textFilter }} />
     </Layout>
   );
 };
