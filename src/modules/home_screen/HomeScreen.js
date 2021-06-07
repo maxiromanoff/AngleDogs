@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TextInput, Keyboard } from 'react-native';
-import { Text, Input, Button } from '../../components';
+import { View, StyleSheet, TextInput } from 'react-native';
+import { Text, Button } from '../../components';
 import { colors, fontSize } from '../../constants';
 import { Layout } from '../../views';
 import { scale, wScale } from '../../utils/resolutions';
 import Feather from 'react-native-vector-icons/Feather';
-import { Formik } from 'formik';
-import * as yup from 'yup';
 import routes from '../routes';
 import { Cards } from './components';
 import RNBootSplash from 'react-native-bootsplash';
-
-const schema = yup.object().shape({
-  input: yup.string().trim(),
-});
-
-const initialValues = {
-  input: '',
-};
 
 const HomeScreen = ({ navigation }) => {
   const [textFilter, setTextFilter] = useState('');

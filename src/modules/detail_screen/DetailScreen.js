@@ -15,7 +15,7 @@ import ImageViewer from 'react-native-image-zoom-viewer';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { colors } from '../../constants';
 import { observer } from 'mobx-react';
-import { useStore } from "../../context";
+import { useStore } from '../../context';
 
 const { width, height } = Dimensions.get('window');
 
@@ -50,7 +50,9 @@ const Image = ({ uri }) => {
 const DetailScreen = ({ route }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { dogsStore: { listDogs, fetchDogsApi } } = useStore();
+  const {
+    dogsStore: { listDogs, fetchDogsApi },
+  } = useStore();
 
   const { name } = route.params;
 

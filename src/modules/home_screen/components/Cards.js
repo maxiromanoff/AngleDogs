@@ -12,10 +12,13 @@ import { useStore } from '../../../context';
 const { scale } = resolutions;
 
 const Cards = ({ textFilter }) => {
-  const { dogsStore: { listItems, fetchListItemApi, filterItems } } = useStore();
+  const {
+    dogsStore: { listItems, fetchListItemApi, filterItems },
+  } = useStore();
 
   useEffect(() => {
     fetchListItemApi();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigation = useNavigation();
