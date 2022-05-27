@@ -7,14 +7,15 @@ import {
   Dimensions,
   Modal,
 } from 'react-native';
-import { Header, Button } from '../../components';
-import { hScale, scale } from '../../utils/resolutions';
-import { Layout } from '../../views';
+import { observer } from 'mobx-react';
 import FastImage from 'react-native-fast-image';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+
+import { Header, Button } from '../../components';
+import { hScale, scale } from '../../utils/resolutions';
+import { Layout } from '../../views';
 import { colors } from '../../constants';
-import { observer } from 'mobx-react';
 import { useStore } from '../../context';
 
 const { width, height } = Dimensions.get('window');

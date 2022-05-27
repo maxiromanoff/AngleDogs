@@ -1,27 +1,25 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+
 import Text from './Text';
 import Button from './Button';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors, fontSize } from '../constants';
 import { scale } from '../utils/resolutions';
-import { useNavigation } from '@react-navigation/native';
 
 const Header = ({ title }) => {
   const navigation = useNavigation();
-  const goBack = () => {
+
+  const handleGoBack = () => {
     navigation.goBack();
   };
 
   return (
-    <View style={styles.container}>
-      <Button onPress={goBack}>
-        <Ionicons name="arrow-back" size={25} color={colors.black} />
-      </Button>
-      <Text bold style={styles.title}>
-        {title}
-      </Text>
-    </View>
+    <Button style={styles.container} onPress={handleGoBack}>
+      <Ionicons name="arrow-back" size={24} color={colors.brown_1} />
+      <Text style={styles.title}>{title}</Text>
+    </Button>
   );
 };
 
@@ -29,14 +27,15 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: scale(12),
-    paddingLeft: scale(12),
-    marginBottom: scale(2),
+    paddingHorizontal: scale(15),
+    marginTop: scale(15),
+    marginBottom: scale(10),
   },
   title: {
-    fontSize: fontSize.larger,
-    marginLeft: scale(10),
+    fontSize: fontSize.fontSize14,
+    color: colors.brown_1,
+    marginLeft: scale(8),
   },
 });
 
-export default Header;
+export default React.memo(Header);

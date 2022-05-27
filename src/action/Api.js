@@ -6,7 +6,7 @@ const ApiList = () => {
   return axios.get(`${API}breeds/list/all`);
 };
 
-const ApiDogs = name => {
+const ApiDogs = (name) => {
   return axios.get(`${API}breed/${name.replace(/-/gi, '/')}/images/random/8`);
 };
 

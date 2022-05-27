@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
-    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/material-top-tabs": "^6.2.1",
+    "@react-navigation/native": "^6.0.10",
     "@react-navigation/stack": "^5.14.5",
     "axios": "^0.21.1",
     "formik": "^2.2.9",
@@ -25,9 +26,11 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-i18n": "^2.0.15",
     "react-native-image-zoom-viewer": "^3.0.1",
+    "react-native-pager-view": "^5.4.23",
     "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.3.0",
+    "react-native-tab-view": "^3.1.1",
     "react-native-vector-icons": "^8.1.0",
     "yup": "^0.32.9"
   },

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, FlatList, View } from 'react-native';
-import { Text, Button } from '../../../components';
-import { colors } from '../../../constants';
-import { resolutions } from '../../../utils';
-import { useNavigation } from '@react-navigation/native';
-import routes from '../../routes';
-import Feather from 'react-native-vector-icons/Feather';
 import { observer } from 'mobx-react';
-import { useStore } from '../../../context';
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, FlatList, View, Image, Dimensions } from 'react-native';
 
-const { scale } = resolutions;
+import routes from '../../routes';
+import { colors, fontSize } from '../../../constants';
+import { useStore } from '../../../context';
+import { Text, Button } from '../../../components';
+import { hScale, scale } from '../../../utils/resolutions';
+
+const CARD_WIDTH = Dimensions.get('window').width / 2 - scale(20)
 
 const Cards = ({ textFilter }) => {
   const {
@@ -23,17 +23,20 @@ const Cards = ({ textFilter }) => {
 
   const navigation = useNavigation();
 
-  const gotoDetail = name => {
+  const gotoDetail = (name) => {
     navigation.navigate(routes.DETAIL_SCREEN, { name });
   };
 
-  const keyExtractor = item => String(item);
+  const keyExtractor = (item, index) => `${String(item)}-${index}`;
 
   const renderItem = ({ item }) => {
     return (
-      <Button style={styles.card} onPress={() => gotoDetail(item)}>
-        <Text style={styles.itemName}>{item.replace(/-/gi, ' ')}</Text>
-        <Feather name="chevron-right" size={20} color={colors.black} />
+      <Button style={styles.cards} onPress={() => gotoDetail(item)}>
+        <Image
+          style={styles.logo}
+          source={require('../../../Images/dog_icon.png')}
+        />
+        <Text style={styles.itemName}>{item}</Text>
       </Button>
     );
   };
@@ -54,21 +57,49 @@ const Cards = ({ textFilter }) => {
       keyExtractor={keyExtractor}
       renderItem={renderItem}
       initialNumToRender={20}
+      numColumns={2}
       removeClippedSubviews
+      showsVerticalScrollIndicator={false}
+      style={styles.flatlist}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: scale(15),
-    paddingVertical: scale(7),
+  flatlist: {
+    paddingTop: scale(8),
+    paddingHorizontal: scale(10),
+  },
+  cards: {
+    marginTop: scale(2),
+    height: hScale(135),
+    width: CARD_WIDTH,
+    marginBottom: scale(6),
+    borderRadius: scale(6),
+    marginHorizontal: scale(5),
+    backgroundColor: colors.white,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
   itemName: {
+    color: colors.brown_1,
     textTransform: 'capitalize',
+    fontSize: fontSize.smallest,
+    textAlign: 'center',
+    paddingVertical: scale(2),
+  },
+  logo: {
+    width: CARD_WIDTH,
+    height: hScale(110),
+    borderTopLeftRadius: scale(6),
+    borderTopRightRadius: scale(6),
   },
   loadings: {
     paddingHorizontal: scale(15),
@@ -79,7 +110,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: scale(7),
     borderRadius: 1,
-  },
+  }
 });
 
 export default React.memo(observer(Cards));

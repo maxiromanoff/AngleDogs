@@ -1,29 +1,19 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Header } from '../../components';
-import { Layout } from '../../views';
 import DeviceInfo from 'react-native-device-info';
+
+import { Layout } from '../../views';
+import { Text, Header } from '../../components';
 import { scale } from '../../utils/resolutions';
-import { fontSize } from '../../constants';
+import { colors, fontSize } from '../../constants';
 
 const SettingScreen = () => {
   return (
     <Layout>
       <Header title="Settings" />
       <View style={styles.appInfo}>
-        <View style={styles.appName}>
-          <Text bold style={styles.title}>
-            App Name:{' '}
-          </Text>
-          <Text>{DeviceInfo.getApplicationName()}</Text>
-        </View>
-        <View style={styles.version}>
-          <Text bold style={styles.title}>
-            App Version:{' '}
-          </Text>
-          <Text>{DeviceInfo.getVersion()}</Text>
-        </View>
-        <Text>{'A gift for all dog lovers around the world !'}</Text>
+        <Text style={styles.title}>Version:{' '}{DeviceInfo.getVersion()}</Text>
+        <Text style={styles.message}>{'A gift for all dog lovers around the world !'}</Text>
       </View>
       <View style={styles.copyright}>
         <Text style={styles.textCopyright}>{'Copyright © maxiromanoff'}</Text>
@@ -34,22 +24,17 @@ const SettingScreen = () => {
 
 const styles = StyleSheet.create({
   appInfo: {
-    marginTop: scale(10),
+    marginTop: scale(8),
     paddingHorizontal: scale(15),
   },
   title: {
-    fontSize: fontSize.normal,
-    marginRight: scale(10),
-  },
-  appName: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    color: colors.brown_1,
+    fontSize: fontSize.small,
     marginBottom: scale(8),
   },
-  version: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: scale(8),
+  message: {
+    color: colors.brown_1,
+    fontSize: fontSize.small,
   },
   copyright: {
     position: 'absolute',
@@ -60,7 +45,8 @@ const styles = StyleSheet.create({
   textCopyright: {
     fontSize: fontSize.smallest,
     textAlign: 'center',
+    color: colors.brown_1,
   },
 });
 
-export default SettingScreen;
+export default React.memo(SettingScreen);

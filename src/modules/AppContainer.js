@@ -10,7 +10,6 @@ import SettingScreen from './setting_screen';
 import DetailScreen from './detail_screen';
 
 const Stack = createStackNavigator();
-
 const AppContainer = () => {
   return (
     <Stack.Navigator

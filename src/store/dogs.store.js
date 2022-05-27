@@ -16,6 +16,7 @@ class DogsStore {
 
   async fetchListItemApi() {
     let resList = await ApiList();
+    console.log("resList", resList)
     runInAction(() => {
       this.listItems = formatList(resList.data);
     });
