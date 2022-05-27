@@ -51,7 +51,6 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
       </View>
-
       <Cards {...{ textFilter }} />
     </Layout>
   );

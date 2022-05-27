@@ -67,8 +67,8 @@ const Cards = ({ textFilter }) => {
 
 const styles = StyleSheet.create({
   flatlist: {
-    paddingTop: scale(8),
-    paddingHorizontal: scale(10),
+    paddingVertical: scale(8),
+    paddingHorizontal: scale(9),
   },
   cards: {
     marginTop: scale(2),

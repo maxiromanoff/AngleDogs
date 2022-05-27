@@ -8,49 +8,18 @@ import {
   Modal,
 } from 'react-native';
 import { observer } from 'mobx-react';
-import FastImage from 'react-native-fast-image';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import { Header, Button } from '../../components';
+import { colors } from '../../constants';
+import { Header, Button, ImageAspectRatio } from '../../components';
 import { hScale, scale } from '../../utils/resolutions';
 import { Layout } from '../../views';
-import { colors } from '../../constants';
 import { useStore } from '../../context';
 
-const { width, height } = Dimensions.get('window');
-
-const Image = ({ uri }) => {
-  const [sizeImage, setSizeImage] = useState({
-    width: '100%',
-    height: height / 2,
-  });
-
-  useEffect(() => {
-    RNImage.getSize(uri, (srcWidth, srcHeight) => {
-      let ratio = Math.min(width / srcWidth, height / srcHeight);
-      setSizeImage({
-        width: srcWidth * ratio,
-        height: srcHeight * ratio,
-      });
-    });
-  }, [uri]);
-
-  return (
-    <FastImage
-      source={{
-        uri,
-        priority: FastImage.priority.high,
-      }}
-      resizeMode={FastImage.resizeMode.cover}
-      style={[styles.image, sizeImage]}
-    />
-  );
-};
 
 const DetailScreen = ({ route }) => {
   const [modalVisible, setModalVisible] = useState(false);
-
   const {
     dogsStore: { listDogs, fetchDogsApi },
   } = useStore();
@@ -71,7 +40,7 @@ const DetailScreen = ({ route }) => {
   const renderItem = ({ item }) => {
     return (
       <Button onPress={() => setModalVisible(item)}>
-        <Image uri={item} />
+        <ImageAspectRatio uri={item} style={styles.imageAspectRatio} />
       </Button>
     );
   };
@@ -91,7 +60,7 @@ const DetailScreen = ({ route }) => {
 
   return (
     <Layout>
-      <Header title="Detail" />
+      <Header title={name} />
       <FlatList
         data={listDogs}
         keyExtractor={keyExtractor}
@@ -99,7 +68,9 @@ const DetailScreen = ({ route }) => {
       />
       <Modal visible={!!modalVisible} transparent={true}>
         <ImageViewer
+          useNativeDriver={true}
           imageUrls={[{ url: modalVisible }]}
+          enableSwipeDown={true}
           renderHeader={() => (
             <Button style={styles.closeBtn} onPress={handleCloseBtn}>
               <AntDesign name="close" size={18} color={colors.white} />
@@ -130,6 +101,9 @@ const styles = StyleSheet.create({
     right: 10,
     zIndex: 9999,
   },
+  imageAspectRatio: {
+    marginBottom: scale(8),
+  }
 });
 
 export default observer(DetailScreen);
