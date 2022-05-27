@@ -22,10 +22,14 @@ class DogsStore {
   }
 
   async fetchDogsApi(name) {
-    let resDogs = await ApiDogs(name);
-    runInAction(() => {
-      this.listDogs = resDogs.data.message;
-    });
+    if (name === null) {
+      this.listDogs = [];
+    } else {
+      let resDogs = await ApiDogs(name);
+      runInAction(() => {
+        this.listDogs = resDogs.data.message;
+      });
+    }
   }
 
   filterItems(name) {

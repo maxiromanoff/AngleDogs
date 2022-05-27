@@ -19,12 +19,12 @@ import { useStore } from '../../context';
 
 
 const DetailScreen = ({ route }) => {
+  const { name } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
   const {
     dogsStore: { listDogs, fetchDogsApi },
   } = useStore();
 
-  const { name } = route.params;
 
   const handleCloseBtn = () => {
     setModalVisible(false);
@@ -32,6 +32,8 @@ const DetailScreen = ({ route }) => {
 
   useEffect(() => {
     fetchDogsApi(name);
+
+    return () => fetchDogsApi(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
