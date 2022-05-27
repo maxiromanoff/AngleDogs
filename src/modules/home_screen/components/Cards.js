@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
+import Shimmer from 'react-native-shimmer';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, FlatList, View, Image, Dimensions } from 'react-native';
 
@@ -12,16 +13,15 @@ import { hScale, scale } from '../../../utils/resolutions';
 const CARD_WIDTH = Dimensions.get('window').width / 2 - scale(20)
 
 const Cards = ({ textFilter }) => {
+  const navigation = useNavigation();
   const {
-    dogsStore: { listItems, fetchListItemApi, filterItems },
+    dogsStore: { fetchListItemApi, filterItems, listItems },
   } = useStore();
 
   useEffect(() => {
     fetchListItemApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const navigation = useNavigation();
 
   const gotoDetail = (name) => {
     navigation.navigate(routes.DETAIL_SCREEN, { name });
@@ -41,11 +41,12 @@ const Cards = ({ textFilter }) => {
     );
   };
 
-  if (!listItems) {
+  if (listItems.length === 0) {
     return (
-      <View style={styles.loadings}>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
-          <View style={styles.loading} key={n} />
+      <View style={styles.loadingsContainer}>
+        {[1, 2, 3, 4, 5, 6].map(i => (
+          <Shimmer key={i} style={styles.loading}>
+          </Shimmer>
         ))}
       </View>
     );
@@ -53,14 +54,17 @@ const Cards = ({ textFilter }) => {
 
   return (
     <FlatList
-      data={textFilter ? filterItems(textFilter) : listItems}
-      keyExtractor={keyExtractor}
-      renderItem={renderItem}
-      initialNumToRender={20}
+      data={textFilter
+        ? filterItems(textFilter)
+        : listItems
+      }
       numColumns={2}
+      initialNumToRender={10}
+      renderItem={renderItem}
       removeClippedSubviews
-      showsVerticalScrollIndicator={false}
       style={styles.flatlist}
+      keyExtractor={keyExtractor}
+      showsVerticalScrollIndicator={false}
     />
   );
 };
@@ -101,16 +105,18 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: scale(6),
     borderTopRightRadius: scale(6),
   },
-  loadings: {
+  loadingsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     paddingHorizontal: scale(15),
   },
   loading: {
-    backgroundColor: '#f9f9f9',
-    height: 35,
-    width: '100%',
-    marginVertical: scale(7),
-    borderRadius: 1,
-  }
+    width: '46%',
+    height: hScale(115),
+    backgroundColor: colors.yellow_1,
+    marginHorizontal: scale(6),
+    marginVertical: scale(6),
+  },
 });
 
-export default React.memo(observer(Cards));
+export default observer(Cards);

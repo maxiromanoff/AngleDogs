@@ -1,47 +1,14 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from 'react';
 import RNFastImage from 'react-native-fast-image';
-import MCIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { colors } from '../constants';
-import { scale } from '../utils/resolutions';
-
-const FastImage = ({ style, handleError, resizeMode, ...rest }) => {
-    const [isError, setError] = useState(false);
-
-    const onError = () => {
-        if (!isError) {
-            setError(true);
-            handleError && handleError();
-        }
-    };
-
-    if (isError) {
-        return (
-            <View style={[styles.error, style]}>
-                <MCIcons
-                    name="image-remove"
-                    color={colors.gray}
-                    size={scale(24)}
-                />
-            </View>
-        );
-    }
-
+const FastImage = ({ style, ...rest }) => {
     return (
         <RNFastImage
             {...rest}
             {...{ style }}
-            resizeMode={resizeMode || RNFastImage.resizeMode.cover}
-            onError={onError}
+            resizeMode={RNFastImage.resizeMode.cover}
         />
     );
 };
-
-const styles = StyleSheet.create({
-    error: {
-        backgroundColor: colors.graySystem3,
-    },
-});
 
 export default React.memo(FastImage);

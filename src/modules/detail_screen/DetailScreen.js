@@ -3,15 +3,15 @@ import {
   View,
   StyleSheet,
   FlatList,
-  Image as RNImage,
-  Dimensions,
   Modal,
+  Text,
 } from 'react-native';
 import { observer } from 'mobx-react';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Shimmer from 'react-native-shimmer';
 
-import { colors } from '../../constants';
+import { colors, fontSize } from '../../constants';
 import { Header, Button, ImageAspectRatio } from '../../components';
 import { hScale, scale } from '../../utils/resolutions';
 import { Layout } from '../../views';
@@ -22,9 +22,8 @@ const DetailScreen = ({ route }) => {
   const { name } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
   const {
-    dogsStore: { listDogs, fetchDogsApi },
+    dogsStore: { fetchDogsApi, listDogs },
   } = useStore();
-
 
   const handleCloseBtn = () => {
     setModalVisible(false);
@@ -47,15 +46,15 @@ const DetailScreen = ({ route }) => {
     );
   };
 
-  if (!listDogs) {
+  if (listDogs.length === 0) {
     return (
       <Layout>
-        <Header title="Detail" />
-        <View style={styles.loadings}>
-          {[1, 2, 3].map(i => (
-            <View style={styles.loading} key={i} />
-          ))}
-        </View>
+        <Header title={name} />
+        {[1, 2, 3].map(i => (
+          <Shimmer key={i} style={styles.loading}>
+            <Text style={styles.textLoading}>Loading...</Text>
+          </Shimmer>
+        ))}
       </Layout>
     );
   }
@@ -65,8 +64,10 @@ const DetailScreen = ({ route }) => {
       <Header title={name} />
       <FlatList
         data={listDogs}
-        keyExtractor={keyExtractor}
         renderItem={renderItem}
+        style={styles.flatlist}
+        keyExtractor={keyExtractor}
+        showsVerticalScrollIndicator={false}
       />
       <Modal visible={!!modalVisible} transparent={true}>
         <ImageViewer
@@ -85,16 +86,18 @@ const DetailScreen = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
-  image: {
-    marginVertical: scale(5),
-    backgroundColor: '#f9f9f9',
+  flatlist: {
+    paddingHorizontal: scale(15),
   },
   loading: {
-    backgroundColor: '#f9f9f9',
-    height: hScale(175),
     width: '100%',
+    height: hScale(175),
     marginVertical: scale(7),
-    borderRadius: 1,
+    backgroundColor: colors.yellow_1,
+  },
+  textLoading: {
+    color: colors.brown_1,
+    fontSize: fontSize.small,
   },
   closeBtn: {
     padding: scale(15),
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
   },
   imageAspectRatio: {
     marginBottom: scale(8),
-  }
+  },
 });
 
 export default observer(DetailScreen);

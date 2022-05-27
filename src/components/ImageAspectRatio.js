@@ -14,10 +14,8 @@ const ImageAspectRatio = ({ style, uri }) => {
         }
     }, []);
 
-    if (!uri) {
-        return null;
-    }
-
+    if (!uri) { return null };
+    
     return (
         <View>
             <FastImage
