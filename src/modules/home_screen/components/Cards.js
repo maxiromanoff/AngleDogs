@@ -34,7 +34,7 @@ const Cards = ({ textFilter }) => {
       <Button style={styles.cards} onPress={() => gotoDetail(item)}>
         <Image
           style={styles.logo}
-          source={require('../../../Images/dog_icon.png')}
+          source={require('../../../images/dog_icon.png')}
         />
         <Text style={styles.itemName}>{item}</Text>
       </Button>
