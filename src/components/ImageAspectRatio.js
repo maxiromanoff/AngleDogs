@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Image as RNImage, Dimensions } from 'react-native';
+import { StyleSheet, View, Image as RNImage } from 'react-native';
 
 import FastImage from './FastImage';
 
@@ -15,7 +15,7 @@ const ImageAspectRatio = ({ style, uri }) => {
     }, []);
 
     if (!uri) { return null };
-    
+
     return (
         <View>
             <FastImage

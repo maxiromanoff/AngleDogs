@@ -18,14 +18,14 @@ const Cards = ({ textFilter }) => {
     dogsStore: { fetchListItemApi, filterItems, listItems },
   } = useStore();
 
+  const gotoDetail = (name) => {
+    navigation.navigate(routes.DETAIL_SCREEN, { name });
+  };
+
   useEffect(() => {
     fetchListItemApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const gotoDetail = (name) => {
-    navigation.navigate(routes.DETAIL_SCREEN, { name });
-  };
 
   const keyExtractor = (item, index) => `${String(item)}-${index}`;
 
@@ -44,13 +44,12 @@ const Cards = ({ textFilter }) => {
   if (listItems.length === 0) {
     return (
       <View style={styles.loadingsContainer}>
-        {[1, 2, 3, 4, 5, 6].map(i => (
-          <Shimmer key={i} style={styles.loading}>
-          </Shimmer>
+        {[1, 2, 3, 4].map(i => (
+          <Shimmer key={i} style={styles.loading} animating={true} />
         ))}
       </View>
     );
-  }
+  };
 
   return (
     <FlatList
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
   loading: {
     width: '46%',
     height: hScale(115),
-    backgroundColor: colors.yellow_1,
+    backgroundColor: colors.gray,
     marginHorizontal: scale(6),
     marginVertical: scale(6),
   },

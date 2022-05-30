@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet,
-  FlatList,
+  View,
   Modal,
-  Text,
+  FlatList,
+  StyleSheet,
 } from 'react-native';
 import { observer } from 'mobx-react';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -49,14 +49,14 @@ const DetailScreen = ({ route }) => {
     return (
       <Layout>
         <Header title={name} />
-        {[1, 2, 3].map(i => (
-          <Shimmer key={i} style={styles.loading}>
-            <Text style={styles.textLoading}>Loading...</Text>
-          </Shimmer>
-        ))}
+        <View style={styles.loadingsContainer}>
+          {[1, 2, 3, 4].map(i => (
+            <Shimmer key={i} style={styles.loadingCard} animating={true} />
+          ))}
+        </View>
       </Layout>
     );
-  }
+  };
 
   return (
     <Layout>
@@ -108,9 +108,18 @@ const styles = StyleSheet.create({
   imageAspectRatio: {
     marginBottom: scale(8),
   },
-  icon: {
-    width: '100%',
-    height: '100%',
+  loadingsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: scale(15),
+  },
+  loadingCard: {
+    width: '46%',
+    height: hScale(95),
+    borderRadius: scale(3),
+    backgroundColor: colors.gray,
+    marginHorizontal: scale(6),
+    marginVertical: scale(6),
   },
 });
 
