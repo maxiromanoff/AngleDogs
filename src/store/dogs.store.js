@@ -33,7 +33,6 @@ class DogsStore {
   }
 
   filterItems(name) {
-    // tra ve 1 cai mang chua items theo name
     return this.listItems.filter(d =>
       String(d).toLocaleLowerCase().includes(String(name).toLocaleLowerCase()),
     );
