@@ -10,11 +10,11 @@ import ImageViewer from 'react-native-image-zoom-viewer';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Shimmer from 'react-native-shimmer';
 
-import { colors, fontSize } from '../../constants';
-import { Header, Button, ImageAspectRatio } from '../../components';
-import { hScale, scale } from '../../utils/resolutions';
 import { Layout } from '../../views';
 import { useStore } from '../../context';
+import { colors } from '../../constants';
+import { hScale, scale } from '../../utils/resolutions';
+import { Header, Button, ImageAspectRatio } from '../../components';
 
 
 const DetailScreen = ({ route }) => {
@@ -23,8 +23,9 @@ const DetailScreen = ({ route }) => {
   const {
     dogsStore: { fetchDogsApi, listDogs },
   } = useStore();
+  let imagesData = listDogs?.map(item => ({ url: item }))
 
-  const handleCloseBtn = () => {
+  const handleCloseModal = () => {
     setModalVisible(false);
   };
 
@@ -35,12 +36,12 @@ const DetailScreen = ({ route }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const keyExtractor = item => String(item);
+  const keyExtractor = (item, index) => `${item}-${index}`;
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item, index }) => {
     return (
-      <Button onPress={() => setModalVisible(item)}>
-        <ImageAspectRatio uri={item} style={styles.imageAspectRatio} />
+      <Button onPress={() => setModalVisible({ item, index })}>
+        <ImageAspectRatio uri={item.url} style={styles.imageAspectRatio} />
       </Button>
     );
   };
@@ -62,7 +63,7 @@ const DetailScreen = ({ route }) => {
     <Layout>
       <Header title={name} />
       <FlatList
-        data={listDogs}
+        data={imagesData}
         renderItem={renderItem}
         style={styles.flatlist}
         keyExtractor={keyExtractor}
@@ -70,15 +71,14 @@ const DetailScreen = ({ route }) => {
       />
       <Modal visible={!!modalVisible} transparent={true}>
         <ImageViewer
-          useNativeDriver={true}
-          imageUrls={[{ url: modalVisible }]}
+          imageUrls={imagesData}
           enableSwipeDown={true}
-          renderHeader={() => (
-            <Button style={styles.closeBtn} onPress={handleCloseBtn}>
-              <AntDesign name="close" size={18} color={colors.white} />
-            </Button>
-          )}
+          onSwipeDown={handleCloseModal}
+          index={modalVisible?.index || 0}
         />
+        <Button style={styles.closeBtn} onPress={handleCloseModal}>
+          <AntDesign name="close" size={scale(19)} color={colors.white} />
+        </Button>
       </Modal>
     </Layout>
   );
@@ -88,21 +88,11 @@ const styles = StyleSheet.create({
   flatlist: {
     paddingHorizontal: scale(15),
   },
-  loading: {
-    width: '100%',
-    height: hScale(175),
-    marginVertical: scale(7),
-    backgroundColor: colors.yellow_1,
-  },
-  textLoading: {
-    color: colors.brown_1,
-    fontSize: fontSize.small,
-  },
   closeBtn: {
     padding: scale(15),
     position: 'absolute',
-    top: 10,
-    right: 10,
+    top: scale(5),
+    right: scale(5),
     zIndex: 9999,
   },
   imageAspectRatio: {
