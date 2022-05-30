@@ -4,11 +4,11 @@ import Shimmer from 'react-native-shimmer';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, FlatList, View, Image, Dimensions } from 'react-native';
 
-import routes from '../../routes';
-import { colors, fontSize } from '../../../constants';
-import { useStore } from '../../../context';
-import { Text, Button } from '../../../components';
-import { hScale, scale } from '../../../utils/resolutions';
+import routes from '@routes';
+import { colors, fontSize } from '@constants';
+import { useStore } from '@context';
+import { Text, Button } from '@components';
+import { hScale, scale } from '@utils/resolutions';
 
 const CARD_WIDTH = Dimensions.get('window').width / 2 - scale(20)
 

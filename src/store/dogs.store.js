@@ -1,6 +1,6 @@
 import { action, runInAction, makeAutoObservable } from 'mobx';
 import { ApiList, ApiDogs } from '../action/Api';
-import { formatList } from '../utils';
+import { formatList } from '@utils';
 
 class DogsStore {
   listItems = [];

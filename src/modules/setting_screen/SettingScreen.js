@@ -2,10 +2,10 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
-import { Layout } from '../../views';
-import { Text, Header } from '../../components';
-import { scale } from '../../utils/resolutions';
-import { colors, fontSize } from '../../constants';
+import { Layout } from '@views';
+import { Text, Header } from '@components';
+import { scale } from '@utils/resolutions';
+import { colors, fontSize } from '@constants';
 
 const SettingScreen = () => {
   return (

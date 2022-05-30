@@ -4,12 +4,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import RNBootSplash from 'react-native-bootsplash';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import routes from '../routes';
-import { Layout } from '../../views';
+import routes from '@routes';
+import { Layout } from '@views';
 import { Cards } from './components';
-import { Text, Button } from '../../components';
-import { colors, fontSize } from '../../constants';
-import { scale } from '../../utils/resolutions';
+import { Text, Button } from '@components';
+import { colors, fontSize } from '@constants';
+import { scale } from '@utils/resolutions';
 
 const HomeScreen = ({ navigation }) => {
   const [textFilter, setTextFilter] = useState(null);

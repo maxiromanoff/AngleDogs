@@ -10,11 +10,11 @@ import ImageViewer from 'react-native-image-zoom-viewer';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Shimmer from 'react-native-shimmer';
 
-import { Layout } from '../../views';
-import { useStore } from '../../context';
-import { colors } from '../../constants';
-import { hScale, scale } from '../../utils/resolutions';
-import { Header, Button, ImageAspectRatio } from '../../components';
+import { Layout } from '@views';
+import { useStore } from '@context';
+import { colors } from '@constants';
+import { hScale, scale } from '@utils/resolutions';
+import { Header, Button, ImageAspectRatio } from '@components';
 
 
 const DetailScreen = ({ route }) => {
