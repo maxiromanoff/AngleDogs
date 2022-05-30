@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View,
   StyleSheet,
   FlatList,
   Modal,
@@ -108,6 +107,10 @@ const styles = StyleSheet.create({
   },
   imageAspectRatio: {
     marginBottom: scale(8),
+  },
+  icon: {
+    width: '100%',
+    height: '100%',
   },
 });
 
